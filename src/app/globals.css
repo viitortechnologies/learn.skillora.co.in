@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 67% 99%;
+  --foreground: 0 0% 13%;
+  --primary: 258 71% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 100%;
+  --secondary-foreground: 0 0% 40%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 13%;
+  --muted: 0 0% 92%;
+  --muted-foreground: 0 0% 53.33%;
+  --accent: 0 0% 100%;
+  --accent-foreground: 0 0% 13%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --ring: 258 71% 55%;
+  --radius: 0.5rem;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html,
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.field {
+  @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+}
+
+.btn-primary {
+  @apply btn h-10 px-4 bg-primary text-primary-foreground hover:bg-primary/90 border border-transparent;
+}
+
+.btn-outline {
+  @apply btn h-10 px-4 bg-secondary text-primary hover:bg-primary/10 border border-primary;
+}
+
+.btn-ghost {
+  @apply btn size-10 text-foreground hover:bg-accent hover:text-accent-foreground;
+}
+
+.card-surface {
+  @apply bg-card text-card-foreground rounded-2xl border border-border overflow-hidden;
+}
