@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import type { Course, Database } from "./types";
 
 function lesson(id: string, title: string, duration: string, isFreePreview = false) {
@@ -364,29 +363,26 @@ export function buildSeedCourses(): Course[] {
   ];
 }
 
-export async function createSeedDatabase(): Promise<Database> {
-  const adminHash = await bcrypt.hash("Skillora@Admin", 10);
-  const studentHash = await bcrypt.hash("Student@123", 10);
-
+export function createSeedDatabase(): Database {
   return {
     users: [
       {
         id: "u-admin",
         name: "Skillora Admin",
         email: "admin@skillora.co.in",
-        passwordHash: adminHash,
+        passwordHash: "$2b$10$ljHaaDvXILkR5Rz0ML/SeeVB1bmG1.DwuN866xl.Yzs43577bEC02",
         role: "admin",
         enrolledCourseIds: [],
-        createdAt: new Date().toISOString(),
+        createdAt: "2026-01-01T00:00:00.000Z",
       },
       {
         id: "u-student",
         name: "Demo Student",
         email: "student@skillora.co.in",
-        passwordHash: studentHash,
+        passwordHash: "$2b$10$HZdPAuCK863s5wJqoFfS9uaxxVkTuD0lGWxgSS7klRnm91C/cwQom",
         role: "student",
         enrolledCourseIds: ["c-devsecops"],
-        createdAt: new Date().toISOString(),
+        createdAt: "2026-01-01T00:00:00.000Z",
       },
     ],
     courses: buildSeedCourses(),

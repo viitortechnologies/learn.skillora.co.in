@@ -38,7 +38,7 @@ export async function readDb(): Promise<Database> {
     // Fall through to in-memory seed.
   }
 
-  memoryDb = await createSeedDatabase();
+  memoryDb = createSeedDatabase();
   try {
     ensureDirs();
     fs.writeFileSync(DB_PATH, JSON.stringify(memoryDb, null, 2));

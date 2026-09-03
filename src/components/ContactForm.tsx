@@ -9,22 +9,17 @@ export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
   const [message, setMessage] = useState("");
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) {
-      setStatus("Thanks. Our counselors will reach you shortly.");
-      form.reset();
-      setMessage("");
-    } else {
-      setStatus(`Could not send. Please call ${site.phone} or message us on WhatsApp.`);
-    }
+    const text = encodeURIComponent(
+      `Hi Skillora! I would like to get in touch.\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || "-"}\nMessage: ${data.message}`
+    );
+    window.open(`${site.whatsapp}?text=${text}`, "_blank", "noopener,noreferrer");
+    form.reset();
+    setMessage("");
+    setStatus("WhatsApp is opening with your message.");
   }
 
   return (
@@ -63,7 +58,7 @@ export function ContactForm() {
               <span className="text-xs text-muted-foreground">{message.length}/120</span>
             </div>
           </div>
-          <button className="btn-primary h-11 px-8 font-semibold w-full">Submit</button>
+          <button className="btn-primary h-11 px-8 font-semibold w-full">Send on WhatsApp</button>
           {status && <p className="text-sm text-center">{status}</p>}
           <p className="text-xs text-muted-foreground text-center mb-0">
             By contacting us, you agree to our{" "}

@@ -1,6 +1,6 @@
 # learn.skillora.co.in
 
-Skillora LMS modeled on the ClassX course marketplace layout, using Skillora branding and course information from [skillora.co.in](https://www.skillora.co.in/).
+Skillora learning site with courses, e-books, blogs, and WhatsApp enrollment.
 
 ## Run locally
 
@@ -18,8 +18,6 @@ Open http://localhost:3000
 | Instructor (upload videos) | admin@skillora.co.in | Skillora@Admin |
 | Demo student | student@skillora.co.in | Student@123 |
 
-Sign in as admin and open **Upload** to replace lesson placeholders with your recordings. Checkout shows a payment-gateway placeholder until that phase.
+Buy Now / Enroll Now / Contact open WhatsApp to **+91 99662 82831** with the course or book name.
 
-## Notes
-
-Uploaded videos are stored in `data/uploads/` (gitignored). Course catalog lives in `data/db.json` after first run.
+Video uploads from admin are stored in `data/uploads/` on a local server. Vercel has no durable disk, so catalog pages use in-memory seed data in production.
