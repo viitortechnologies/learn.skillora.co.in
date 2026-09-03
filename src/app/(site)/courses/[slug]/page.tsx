@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { CheckCircle2, Clock, Star } from "lucide-react";
 import { findCourse, readDb } from "@/lib/db";
 import { formatInr } from "@/lib/format";
-import { getSession } from "@/lib/auth";
 import { VideoPlaceholder } from "@/components/VideoPlaceholder";
 import { EnrollButton } from "@/components/EnrollButton";
 
@@ -16,18 +15,12 @@ export default async function CourseDetailPage({
   const db = await readDb();
   const course = findCourse(db, slug);
   if (!course) notFound();
-  const user = await getSession();
-  const enrolled = !!user && (user.role === "admin" || db.users.find((u) => u.id === user.id)?.enrolledCourseIds.includes(course.id));
   const preview = course.modules[0]?.lessons[0];
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_340px] gap-8">
       <div className="space-y-6">
-        {preview?.videoFileName && enrolled ? (
-          <video className="w-full rounded-2xl bg-black" controls src={`/api/videos/${preview.id}`} />
-        ) : (
-          <VideoPlaceholder title={preview?.title || course.title} poster={course.banner} />
-        )}
+        <VideoPlaceholder title={preview?.title || course.title} poster={course.banner} />
         <div>
           <p className="text-sm text-primary font-medium mb-1">{course.category}</p>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{course.title}</h1>
@@ -64,7 +57,6 @@ export default async function CourseDetailPage({
                       <span>
                         {lesson.title}
                         {lesson.isFreePreview && <span className="ml-2 text-xs text-primary">Preview</span>}
-                        {!lesson.videoFileName && <span className="ml-2 text-xs text-muted-foreground">Placeholder</span>}
                       </span>
                       <span className="text-muted-foreground">{lesson.duration}</span>
                     </li>
@@ -81,13 +73,7 @@ export default async function CourseDetailPage({
           <p className="text-2xl font-bold text-primary">{formatInr(course.price)}</p>
           <p className="text-muted-foreground line-through">{formatInr(course.originalPrice)}</p>
         </div>
-        {enrolled ? (
-          <Link href={`/learn/${course.slug}`} className="btn-primary w-full">
-            Start learning
-          </Link>
-        ) : (
-          <EnrollButton courseId={course.id} loggedIn={!!user} />
-        )}
+        <EnrollButton courseName={course.title} price={course.price} />
         <ul className="text-sm space-y-2">
           {course.highlights.map((h) => (
             <li key={h} className="flex gap-2">

@@ -10,3 +10,12 @@ export function formatInr(value: number) {
     maximumFractionDigits: 0,
   }).format(value);
 }
+
+export function whatsappBuyLink(itemName: string, price?: number) {
+  const wa = "919966282831";
+  const priceText = price ? ` (${formatInr(price)})` : "";
+  const msg = encodeURIComponent(
+    `Hi Skillora! I'm interested in: *${itemName}*${priceText}. Please share more details.`
+  );
+  return `https://wa.me/${wa}?text=${msg}`;
+}

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { whatsappBuyLink } from "@/lib/format";
 
 const products = [
   { title: "Resume + LinkedIn makeover kit", note: "Used in Skillora placement sprints", image: "/products/resume.webp" },
@@ -17,7 +17,14 @@ export default function DigitalProductsPage() {
             <div className="p-6">
               <h2 className="font-semibold mb-1">{p.title}</h2>
               <p className="text-sm text-muted-foreground mb-4">{p.note}</p>
-              <Link href="/#contact" className="btn-outline w-full">View Details</Link>
+              <a
+                href={whatsappBuyLink(p.title)}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary w-full text-center"
+              >
+                Buy Now
+              </a>
             </div>
           </article>
         ))}

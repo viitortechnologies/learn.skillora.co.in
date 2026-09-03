@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
-import { getSession } from "@/lib/auth";
+import { notFound } from "next/navigation";
 import { findCourse, findLesson, readDb } from "@/lib/db";
 import { VideoPlaceholder } from "@/components/VideoPlaceholder";
 
@@ -13,14 +12,9 @@ export default async function LearnPage({
 }) {
   const { slug } = await params;
   const { lesson: lessonId } = await searchParams;
-  const session = await getSession();
-  if (!session) redirect(`/login?next=/learn/${slug}`);
   const db = await readDb();
   const course = findCourse(db, slug);
   if (!course) notFound();
-  const user = db.users.find((u) => u.id === session.id);
-  const allowed = session.role === "admin" || user?.enrolledCourseIds.includes(course.id);
-  if (!allowed) redirect(`/courses/${course.slug}`);
 
   const allLessons = course.modules.flatMap((m) => m.lessons);
   const current = (lessonId && findLesson(course, lessonId)) || allLessons[0];

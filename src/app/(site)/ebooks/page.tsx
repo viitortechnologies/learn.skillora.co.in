@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { readDb } from "@/lib/db";
-import { discountPercent, formatInr } from "@/lib/format";
+import { discountPercent, formatInr, whatsappBuyLink } from "@/lib/format";
 
 export default async function EbooksPage() {
   const db = await readDb();
@@ -20,7 +20,14 @@ export default async function EbooksPage() {
             <p className="text-xl font-bold text-primary">{formatInr(book.price)}</p>
             <p className="text-muted-foreground line-through">{formatInr(book.originalPrice)}</p>
             <p className="text-xs text-primary">{discountPercent(book.price, book.originalPrice)}% off</p>
-            <Link href="/#contact" className="btn-outline w-full">View Details</Link>
+            <a
+              href={whatsappBuyLink(book.title, book.price)}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary w-full text-center"
+            >
+              Buy Now
+            </a>
           </article>
         ))}
       </div>
