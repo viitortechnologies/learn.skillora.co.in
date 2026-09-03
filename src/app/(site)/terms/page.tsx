@@ -11,7 +11,7 @@ export default function TermsPage() {
         Course access is licensed to the enrolled learner only. Payment processing will be enabled in a later release;
         until then, enrollment may be granted without charge for content preparation.
       </p>
-      <p>For questions, call +91 90109 27666 or visit https://www.skillora.co.in/.</p>
+      <p>For questions, call +91 99662 82831 or visit https://www.skillora.co.in/.</p>
     </article>
   );
 }

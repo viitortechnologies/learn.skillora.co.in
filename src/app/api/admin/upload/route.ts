@@ -26,7 +26,14 @@ export async function POST(request: Request) {
   const fileName = `${lessonId}${safeExt}`;
   const dest = path.join(getUploadDir(), fileName);
   const buffer = Buffer.from(await file.arrayBuffer());
-  fs.writeFileSync(dest, buffer);
+  try {
+    fs.writeFileSync(dest, buffer);
+  } catch {
+    return NextResponse.json(
+      { error: "Video storage is not available on this host. Upload videos from a local admin session." },
+      { status: 503 }
+    );
+  }
 
   await updateDb((db) => {
     const course = findCourse(db, courseId);

@@ -6,7 +6,7 @@ export default function RefundPage() {
         Paid enrollments will follow Skillora&apos;s counseling and refund rules once the payment gateway is live. Until
         checkout is enabled, seats reserved from this site are not charged automatically.
       </p>
-      <p>Talk to a counselor on +91 90109 27666 before you enroll if you have billing questions.</p>
+      <p>Talk to a counselor on +91 99662 82831 before you enroll if you have billing questions.</p>
     </article>
   );
 }

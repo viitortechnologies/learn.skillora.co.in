@@ -8,7 +8,7 @@ export default function PrivacyPage() {
         learning server for enrolled learners.
       </p>
       <p>
-        We do not sell personal data. Contact hello@skillora.co.in or +91 90109 27666 to request a correction or deletion.
+        We do not sell personal data. Contact hello@skillora.co.in or +91 99662 82831 to request a correction or deletion.
       </p>
     </article>
   );

@@ -4,15 +4,21 @@ import path from "path";
 import { createSeedDatabase } from "./seed";
 import type { Course, Database, Lesson } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const isServerless = process.env.VERCEL === "1";
+const DATA_DIR = isServerless ? path.join("/tmp", "skillora-data") : path.join(process.cwd(), "data");
 const DB_PATH = path.join(DATA_DIR, "db.json");
 const UPLOAD_DIR = path.join(DATA_DIR, "uploads");
 
+let memoryDb: Database | null = null;
 let writeQueue: Promise<void> = Promise.resolve();
 
 function ensureDirs() {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  } catch {
+    // Vercel’s app directory is read-only; /tmp may still be writable.
+  }
 }
 
 export function getUploadDir() {
@@ -21,20 +27,37 @@ export function getUploadDir() {
 }
 
 export async function readDb(): Promise<Database> {
-  ensureDirs();
-  if (!fs.existsSync(DB_PATH)) {
-    const seed = await createSeedDatabase();
-    fs.writeFileSync(DB_PATH, JSON.stringify(seed, null, 2));
-    return seed;
+  if (memoryDb) return memoryDb;
+
+  try {
+    if (fs.existsSync(DB_PATH)) {
+      memoryDb = JSON.parse(fs.readFileSync(DB_PATH, "utf8")) as Database;
+      return memoryDb;
+    }
+  } catch {
+    // Fall through to in-memory seed.
   }
-  return JSON.parse(fs.readFileSync(DB_PATH, "utf8")) as Database;
+
+  memoryDb = await createSeedDatabase();
+  try {
+    ensureDirs();
+    fs.writeFileSync(DB_PATH, JSON.stringify(memoryDb, null, 2));
+  } catch {
+    // Serve seed from memory when the filesystem cannot be written.
+  }
+  return memoryDb;
 }
 
 export function writeDb(db: Database) {
-  ensureDirs();
+  memoryDb = db;
   const payload = JSON.stringify(db, null, 2);
   writeQueue = writeQueue.then(() => {
-    fs.writeFileSync(DB_PATH, payload);
+    try {
+      ensureDirs();
+      fs.writeFileSync(DB_PATH, payload);
+    } catch {
+      // Persistence is best-effort; catalog pages still work from memory.
+    }
   });
   return writeQueue;
 }

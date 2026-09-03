@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
+import { site } from "@/lib/site";
 
 export function ContactForm() {
   const [status, setStatus] = useState<string | null>(null);
@@ -22,7 +23,7 @@ export function ContactForm() {
       form.reset();
       setMessage("");
     } else {
-      setStatus("Could not send. Please call +91 90109 27666.");
+      setStatus(`Could not send. Please call ${site.phone} or message us on WhatsApp.`);
     }
   }
 
@@ -32,7 +33,7 @@ export function ContactForm() {
         <div>
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight uppercase mb-4">Contact Us</h3>
           <p className="text-muted-foreground max-w-md">
-            Have questions about our courses? Call us on +91 90109 27666 or send a message. We typically respond within 2 hours.
+            Have questions about our courses? Call us on {site.phone} or send a message. We typically respond within 2 hours.
           </p>
         </div>
         <form onSubmit={onSubmit} className="bg-background rounded-2xl shadow-sm p-6 md:p-8 flex flex-col gap-4">
