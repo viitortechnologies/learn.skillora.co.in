@@ -20,14 +20,14 @@ export default async function LearnPage({
   const current = (lessonId && findLesson(course, lessonId)) || allLessons[0];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6 grid lg:grid-cols-[1fr_320px] gap-6">
-      <div>
+    <div className="max-w-7xl mx-auto px-4 py-6 grid lg:grid-cols-[minmax(0,1fr)_320px] gap-6">
+      <div className="min-w-0">
         {current?.videoFileName ? (
           <video key={current.id} className="w-full rounded-2xl bg-black aspect-video" controls src={`/api/videos/${current.id}`} />
         ) : (
           <VideoPlaceholder title={current?.title || "Lesson"} poster={course.banner} />
         )}
-        <h1 className="text-2xl font-bold mt-4">{current?.title}</h1>
+        <h1 className="text-xl sm:text-2xl font-bold mt-4 break-words">{current?.title}</h1>
         <p className="text-muted-foreground">{course.title}</p>
       </div>
       <aside className="rounded-2xl border bg-secondary p-4 h-fit">

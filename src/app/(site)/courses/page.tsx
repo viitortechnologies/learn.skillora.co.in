@@ -19,13 +19,13 @@ export default async function CoursesPage({
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-2">Courses</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2">Courses</h1>
       <p className="text-muted-foreground mb-6">
         Industry-leading programs with live classes, projects and job assistance.
       </p>
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {courses.map((course) => (
-          <CourseCard key={course.id} course={course} />
+          <CourseCard key={course.id} course={course} fill />
         ))}
         {courses.length === 0 && <p>No courses matched your search.</p>}
       </div>

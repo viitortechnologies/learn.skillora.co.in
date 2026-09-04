@@ -9,12 +9,12 @@ export function VideoPlaceholder({ title, poster }: { title: string; poster?: st
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(107,58,212,0.35),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(0,195,255,0.25),transparent_45%)]" />
       )}
       <div className="absolute inset-0 bg-black/45" />
-      <div className="relative z-10 flex flex-col items-center gap-3 px-6 text-center">
-        <span className="inline-flex size-16 items-center justify-center rounded-full bg-white/15 border border-white/30 backdrop-blur-sm">
-          <Play className="size-7 fill-white" />
+      <div className="relative z-10 flex flex-col items-center gap-2 sm:gap-3 px-4 sm:px-6 text-center">
+        <span className="inline-flex size-12 sm:size-16 items-center justify-center rounded-full bg-white/15 border border-white/30 backdrop-blur-sm">
+          <Play className="size-5 sm:size-7 fill-white" />
         </span>
-        <p className="font-semibold">{title}</p>
-        <p className="text-sm text-white/80">Video placeholder — upload from the admin login when ready</p>
+        <p className="font-semibold text-sm sm:text-base line-clamp-2">{title}</p>
+        <p className="text-xs sm:text-sm text-white/80 hidden sm:block">Video placeholder — upload from the admin login when ready</p>
       </div>
     </div>
   );

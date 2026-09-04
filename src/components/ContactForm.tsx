@@ -23,15 +23,15 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="w-full py-6 lg:py-12 px-4 bg-muted">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+    <section id="contact" className="w-full py-6 lg:py-12 px-4 bg-muted scroll-mt-24">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start">
         <div>
           <h3 className="text-3xl md:text-4xl font-bold tracking-tight uppercase mb-4">Contact Us</h3>
           <p className="text-muted-foreground max-w-md">
             Have questions about our courses? Call us on {site.phone} or send a message. We typically respond within 2 hours.
           </p>
         </div>
-        <form onSubmit={onSubmit} className="bg-background rounded-2xl shadow-sm p-6 md:p-8 flex flex-col gap-4">
+        <form onSubmit={onSubmit} className="bg-background rounded-2xl shadow-sm p-4 sm:p-6 md:p-8 flex flex-col gap-4 min-w-0">
           <h3 className="text-2xl font-bold text-foreground mb-1">Get in Touch</h3>
           <p className="text-sm text-muted-foreground mb-2">You can reach us anytime</p>
           <input className="field" name="name" placeholder="Name" required />

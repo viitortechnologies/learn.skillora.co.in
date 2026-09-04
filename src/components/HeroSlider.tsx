@@ -60,24 +60,24 @@ export function HeroSlider() {
   const next = (index + 1) % len;
 
   return (
-    <div className="slider-container relative overflow-hidden px-2 md:px-8">
+    <div className="slider-container relative max-w-7xl mx-auto w-full px-3 sm:px-4 md:px-8">
       <button
-        className="absolute top-1/2 -translate-y-1/2 z-10 btn bg-secondary text-primary hover:bg-secondary border border-input h-10 w-10 left-4"
+        className="absolute top-1/2 -translate-y-1/2 z-10 btn bg-secondary/95 text-primary hover:bg-secondary border border-input size-8 md:size-10 left-4 sm:left-6 md:left-10"
         aria-label="Previous slide"
         onClick={() => setIndex(prev)}
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="size-5 md:size-6" />
       </button>
       <button
-        className="absolute top-1/2 -translate-y-1/2 z-10 btn bg-secondary text-primary hover:bg-secondary border border-input h-10 w-10 right-4"
+        className="absolute top-1/2 -translate-y-1/2 z-10 btn bg-secondary/95 text-primary hover:bg-secondary border border-input size-8 md:size-10 right-4 sm:right-6 md:right-10"
         aria-label="Next slide"
         onClick={() => setIndex(next)}
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="size-5 md:size-6" />
       </button>
-      <div className="flex items-center justify-center gap-4 max-w-7xl mx-auto">
+      <div className="flex items-center justify-center gap-4">
         <Slide slide={slides[prev]} dim />
-        <Link href={slides[index].href} className="block w-[78%] md:w-[62%] shrink-0">
+        <Link href={slides[index].href} className="block w-full md:w-[62%] shrink-0 min-w-0">
           <Banner slide={slides[index]} featured />
         </Link>
         <Slide slide={slides[next]} dim />
@@ -96,14 +96,14 @@ function Slide({ slide, dim }: { slide: (typeof slides)[number]; dim?: boolean }
 
 function Banner({ slide, featured }: { slide: (typeof slides)[number]; featured?: boolean }) {
   return (
-    <div className="relative border rounded-[2rem] overflow-hidden shadow-lg bg-black">
+    <div className="relative border rounded-2xl md:rounded-[2rem] overflow-hidden shadow-lg bg-black">
       <img alt={slide.alt} src={slide.src} className="w-full aspect-[16/9] object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
       {featured && (
-        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8 text-white">
-          <p className="text-xs md:text-sm uppercase tracking-[0.2em] text-cyan-300 mb-1">{slide.kicker}</p>
-          <h2 className="text-xl md:text-3xl font-bold leading-tight">{slide.title}</h2>
-          <p className="text-sm md:text-base text-white/80 mt-1">{slide.subtitle}</p>
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5 md:p-8 text-white">
+          <p className="text-[10px] sm:text-xs md:text-sm uppercase tracking-[0.2em] text-cyan-300 mb-1">{slide.kicker}</p>
+          <h2 className="text-base sm:text-xl md:text-3xl font-bold leading-tight">{slide.title}</h2>
+          <p className="text-xs sm:text-sm md:text-base text-white/80 mt-1 line-clamp-2">{slide.subtitle}</p>
         </div>
       )}
     </div>

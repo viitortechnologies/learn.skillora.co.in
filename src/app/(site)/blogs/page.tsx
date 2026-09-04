@@ -5,8 +5,8 @@ export default async function BlogsPage() {
   const db = await readDb();
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Blogs</h1>
-      <div className="grid md:grid-cols-3 gap-4">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6">Blogs</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {db.blogs.map((post) => (
           <Link key={post.slug} href={`/blogs/${post.slug}`} className="card-surface overflow-hidden hover:shadow-header transition-shadow">
             <img src={post.cover} alt="" className="w-full aspect-[16/9] object-cover" />

@@ -2,8 +2,8 @@ import { site } from "@/lib/site";
 
 export function AboutUs() {
   return (
-    <section id="about" className="max-w-7xl mx-auto px-4">
-      <h3 className="text-3xl md:text-4xl font-bold tracking-tight uppercase mb-4">About Us</h3>
+    <section id="about" className="max-w-7xl mx-auto px-4 scroll-mt-24">
+      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight uppercase mb-4">About Us</h3>
       <div className="grid lg:grid-cols-2 gap-8 items-start">
         <img
           src="/banners/workshop.webp"

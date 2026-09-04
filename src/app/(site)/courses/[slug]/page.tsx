@@ -18,12 +18,12 @@ export default async function CourseDetailPage({
   const preview = course.modules[0]?.lessons[0];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_340px] gap-8">
-      <div className="space-y-6">
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 grid lg:grid-cols-[minmax(0,1fr)_340px] gap-6 lg:gap-8">
+      <div className="space-y-6 min-w-0 order-2 lg:order-1">
         <VideoPlaceholder title={preview?.title || course.title} poster={course.banner} />
         <div>
           <p className="text-sm text-primary font-medium mb-1">{course.category}</p>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{course.title}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight break-words">{course.title}</h1>
           <p className="text-muted-foreground mt-2">{course.subtitle}</p>
           <div className="flex flex-wrap gap-3 mt-3 text-sm">
             <span className="inline-flex items-center gap-1"><Star className="size-4 text-primary" /> {course.rating} ({course.students} students)</span>
@@ -53,12 +53,12 @@ export default async function CourseDetailPage({
                 </summary>
                 <ul className="mt-3 space-y-2">
                   {mod.lessons.map((lesson) => (
-                    <li key={lesson.id} className="flex items-center justify-between text-sm border-t pt-2">
-                      <span>
+                    <li key={lesson.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-sm border-t pt-2">
+                      <span className="pr-2 break-words">
                         {lesson.title}
                         {lesson.isFreePreview && <span className="ml-2 text-xs text-primary">Preview</span>}
                       </span>
-                      <span className="text-muted-foreground">{lesson.duration}</span>
+                      <span className="text-muted-foreground shrink-0">{lesson.duration}</span>
                     </li>
                   ))}
                 </ul>
@@ -67,7 +67,7 @@ export default async function CourseDetailPage({
           </div>
         </div>
       </div>
-      <aside className="lg:sticky lg:top-28 h-fit card-surface p-5 space-y-4">
+      <aside className="lg:sticky lg:top-28 h-fit card-surface p-4 sm:p-5 space-y-4 order-1 lg:order-2">
         <img src={course.thumbnail} alt="" className="rounded-xl w-full aspect-[16/10] object-cover" />
         <div>
           <p className="text-2xl font-bold text-primary">{formatInr(course.price)}</p>

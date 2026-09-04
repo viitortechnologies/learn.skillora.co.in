@@ -35,7 +35,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
+    <div className="min-h-[80vh] flex items-center justify-center px-3 sm:px-4 py-8 sm:py-12">
       <div className="w-full max-w-4xl grid md:grid-cols-2 rounded-2xl border bg-secondary shadow-header overflow-hidden">
         <div className="relative hidden md:block min-h-[420px]">
           <img src="/banners/java.webp" alt="" className="absolute inset-0 w-full h-full object-cover" />
@@ -44,7 +44,7 @@ export default function SignupPage() {
             Join 10,000+ professionals learning with Skillora
           </p>
         </div>
-        <form onSubmit={onSubmit} className="p-8 space-y-4">
+        <form onSubmit={onSubmit} className="p-5 sm:p-8 space-y-4 min-w-0">
         <div className="flex justify-center">
           <Logo />
         </div>

@@ -43,7 +43,7 @@ export function AdminUploader({ courses }: { courses: Course[] }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl border bg-secondary p-6 space-y-4">
+    <form onSubmit={onSubmit} className="rounded-2xl border bg-secondary p-4 sm:p-6 space-y-4 min-w-0">
       <label className="block text-sm font-medium">
         Course
         <select className="field mt-1" value={courseId} onChange={(e) => { setCourseId(e.target.value); setLessonId(""); }}>
@@ -67,7 +67,7 @@ export function AdminUploader({ courses }: { courses: Course[] }) {
         Video file
         <input className="field mt-1 py-1.5" type="file" name="video" accept="video/*" required />
       </label>
-      <button className="btn-primary" disabled={busy}>Upload & replace placeholder</button>
+      <button className="btn-primary w-full sm:w-auto" disabled={busy}>Upload & replace placeholder</button>
       {status && <p className="text-sm">{status}</p>}
     </form>
   );

@@ -15,10 +15,15 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
 
   return (
     <section className="max-w-7xl mx-auto px-4">
-      <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">Testimonials</h2>
-      <div className="grid md:grid-cols-3 gap-4">
-        {visible.map((item) => (
-          <article key={`${item.id}-${start}`} className="rounded-2xl border bg-secondary p-6 flex flex-col gap-3 min-h-[280px]">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-6">Testimonials</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {visible.map((item, i) => (
+          <article
+            key={`${item.id}-${start}`}
+            className={`rounded-2xl border bg-secondary p-5 sm:p-6 flex-col gap-3 min-h-0 md:min-h-[280px] ${
+              i === 0 ? "flex" : "hidden md:flex"
+            }`}
+          >
             {item.photo ? (
               <img src={item.photo} alt={item.name} className="size-12 rounded-full object-cover" />
             ) : (

@@ -11,7 +11,7 @@ export default async function HomePage() {
   return (
     <div className="bg-background text-foreground">
       <div className="mx-auto flex flex-col min-h-screen antialiased">
-        <div className="pb-8 pt-8 flex flex-col gap-6 md:gap-8 lg:gap-12">
+        <div className="pb-8 pt-3 sm:pt-8 flex flex-col gap-6 md:gap-8 lg:gap-12 min-w-0">
           <HeroSlider />
           <BrowseCards />
           <FeaturedCourses courses={db.courses} />

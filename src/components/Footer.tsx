@@ -7,9 +7,9 @@ export function Footer() {
   return (
     <footer className="w-full border-t border-border bg-background text-foreground" id="footer">
       <div className="flex flex-col gap-4 justify-center max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 lg:gap-8 space-y-3 lg:space-y-0">
-          <div className="flex flex-col lg:gap-12 lg:justify-between lg:col-span-2">
-            <Logo className="h-10 w-auto" />
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8">
+          <div className="flex flex-col lg:gap-12 lg:justify-between col-span-2">
+            <Logo />
             <div className="flex flex-col gap-2 mt-4">
               <h6 className="text-base mb-0 text-foreground">Follow us</h6>
               <div className="flex gap-2 flex-wrap">

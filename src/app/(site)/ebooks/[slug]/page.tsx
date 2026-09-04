@@ -16,10 +16,10 @@ export default async function EbookDetailPage({
   const off = discountPercent(book.price, book.originalPrice);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-[1fr_340px] gap-8">
-      <div className="space-y-6">
+    <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8 grid lg:grid-cols-[minmax(0,1fr)_340px] gap-6 lg:gap-8">
+      <div className="space-y-6 min-w-0 order-2 lg:order-1">
         <p className="text-sm text-primary font-medium">E-Book</p>
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{book.title}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight break-words">{book.title}</h1>
         {book.authors?.length ? (
           <p className="text-muted-foreground">{book.authors.join(", ")}</p>
         ) : null}
@@ -59,8 +59,8 @@ export default async function EbookDetailPage({
           <BookOpen className="size-4" /> Back to all e-books
         </Link>
       </div>
-      <aside className="lg:sticky lg:top-28 h-fit card-surface p-5 space-y-4">
-        <img src={book.cover} alt={book.title} className="rounded-xl w-full aspect-[3/4] object-cover bg-white" />
+      <aside className="lg:sticky lg:top-28 h-fit card-surface p-4 sm:p-5 space-y-4 order-1 lg:order-2">
+        <img src={book.cover} alt={book.title} className="rounded-xl w-full max-h-[420px] aspect-[3/4] object-contain bg-white" />
         <div>
           <p className="text-2xl font-bold text-primary">{formatInr(book.price)}</p>
           <p className="text-muted-foreground line-through">{formatInr(book.originalPrice)}</p>

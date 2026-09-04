@@ -9,7 +9,7 @@ export default async function DashboardPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
         <div>
-          <h1 className="text-3xl font-bold">All Courses</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">All Courses</h1>
           <p className="text-muted-foreground">Browse and start learning</p>
         </div>
       </div>

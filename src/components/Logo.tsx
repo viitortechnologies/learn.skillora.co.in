@@ -1,6 +1,4 @@
-import Link from "next/link";
-
-export function Logo({ className = "h-9 md:h-10 w-auto" }: { className?: string }) {
+export function Logo({ className = "h-8 w-[148px] md:h-10 md:w-[180px]" }: { className?: string }) {
   return (
     <svg viewBox="0 0 220 40" className={className} role="img" aria-label="Skillora">
       <defs>

@@ -13,6 +13,13 @@ const nav = [
   { href: "/ebooks", label: "E-Books" },
 ];
 
+const extra = [
+  { href: "/blogs", label: "Blogs" },
+  { href: "/digital-products", label: "Digital Products" },
+  { href: "/#about", label: "About Us" },
+  { href: "/#contact", label: "Contact Us" },
+];
+
 export function Header({ user }: { user: SessionUser | null }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -27,58 +34,51 @@ export function Header({ user }: { user: SessionUser | null }) {
   }
 
   return (
-    <header id="header" className="sticky top-0 p-4 z-50 w-full pointer-events-none">
-      <div className="pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-2 rounded-xl bg-secondary px-4 py-2.5 shadow-header backdrop-blur-md sm:gap-4 sm:px-3 md:h-16 md:gap-4 md:px-4 min-h-[52px] md:min-h-[64px]">
-        <div className="flex items-center gap-3">
-          <button className="btn-ghost lg:hidden shrink-0" aria-label="Open menu" onClick={() => setOpen(true)}>
-            <Menu className="size-5" />
-          </button>
-          <div className="flex items-center gap-4 lg:gap-6">
-            <Link href="/" className="shrink-0">
-              <Logo />
-            </Link>
-            <div className="hidden min-w-0 gap-4 lg:gap-6 items-center lg:flex">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center transition-all whitespace-nowrap no-underline text-foreground text-sm ${
-                    pathname === item.href ? "" : "opacity-80"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="relative">
-                <button
-                  type="button"
-                  className="flex items-center transition-all whitespace-nowrap no-underline text-foreground text-sm opacity-80 gap-1 outline-none"
-                  onClick={() => setMore((v) => !v)}
-                >
-                  More <ChevronDown className="h-3 w-3" />
-                </button>
-                {more && (
-                  <div className="absolute top-full left-0 mt-2 w-48 rounded-xl border bg-secondary shadow-header p-2 z-50">
-                    <Link href="/blogs" className="block rounded-lg px-3 py-2 text-sm hover:bg-muted" onClick={() => setMore(false)}>
-                      Blogs
+    <header id="header" className="sticky top-0 z-50 w-full p-2 sm:p-4 pointer-events-none">
+      <div className="pointer-events-auto mx-auto flex w-full max-w-7xl min-w-0 items-center justify-between gap-2 rounded-xl bg-secondary px-2.5 py-2 shadow-header backdrop-blur-md sm:gap-4 sm:px-3 md:h-16 md:px-4 min-h-[52px] md:min-h-[64px]">
+        <div className="flex min-w-0 items-center gap-1.5 sm:gap-3">
+          <div className="lg:hidden shrink-0">
+            <button className="btn-ghost size-9" aria-label="Open menu" onClick={() => setOpen(true)}>
+              <Menu className="size-5" />
+            </button>
+          </div>
+          <Link href="/" className="shrink-0 min-w-0">
+            <Logo />
+          </Link>
+          <div className="hidden min-w-0 gap-4 lg:gap-6 items-center lg:flex">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center transition-all whitespace-nowrap no-underline text-foreground text-sm ${
+                  pathname === item.href ? "" : "opacity-80"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <div className="relative">
+              <button
+                type="button"
+                className="flex items-center transition-all whitespace-nowrap no-underline text-foreground text-sm opacity-80 gap-1 outline-none"
+                onClick={() => setMore((v) => !v)}
+              >
+                More <ChevronDown className="h-3 w-3" />
+              </button>
+              {more && (
+                <div className="absolute top-full left-0 mt-2 w-48 rounded-xl border bg-secondary shadow-header p-2 z-50">
+                  {extra.map((item) => (
+                    <Link key={item.href} href={item.href} className="block rounded-lg px-3 py-2 text-sm hover:bg-muted" onClick={() => setMore(false)}>
+                      {item.label}
                     </Link>
-                    <Link href="/digital-products" className="block rounded-lg px-3 py-2 text-sm hover:bg-muted" onClick={() => setMore(false)}>
-                      Digital Products
-                    </Link>
-                    <Link href="/#about" className="block rounded-lg px-3 py-2 text-sm hover:bg-muted" onClick={() => setMore(false)}>
-                      About Us
-                    </Link>
-                    <Link href="/#contact" className="block rounded-lg px-3 py-2 text-sm hover:bg-muted" onClick={() => setMore(false)}>
-                      Contact Us
-                    </Link>
-                  </div>
-                )}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
-        <form className="max-lg:hidden flex lg:max-w-xs w-full" onSubmit={search}>
+        <form className="max-lg:hidden flex lg:max-w-xs w-full min-w-0" onSubmit={search}>
           <div className="relative w-full">
             <Search className="pointer-events-none absolute top-1/2 left-2 size-5 -translate-y-1/2 text-foreground" />
             <input
@@ -92,32 +92,42 @@ export function Header({ user }: { user: SessionUser | null }) {
           </div>
         </form>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {user ? (
             <>
               {user.role === "admin" && (
-                <Link href="/admin" className="btn-outline hidden sm:inline-flex">
-                  Upload
-                </Link>
+                <div className="hidden lg:block">
+                  <Link href="/admin" className="btn-outline">
+                    Upload
+                  </Link>
+                </div>
               )}
-              <Link href="/dashboard" className="btn-primary hidden sm:inline-flex">
-                My learning
-              </Link>
-              <Link href="/dashboard" className="btn-ghost sm:hidden" aria-label="Account">
-                <User className="size-5" />
-              </Link>
+              <div className="hidden lg:block">
+                <Link href="/dashboard" className="btn-primary">
+                  My learning
+                </Link>
+              </div>
+              <div className="lg:hidden">
+                <Link href="/dashboard" className="btn-ghost size-9" aria-label="Account">
+                  <User className="size-5" />
+                </Link>
+              </div>
             </>
           ) : (
             <>
-              <Link href="/login" className="btn-outline hidden sm:inline-flex">
-                Sign in
-              </Link>
-              <Link href="/signup" className="btn-primary hidden sm:inline-flex">
-                Sign up
-              </Link>
-              <Link href="/login" className="btn-ghost sm:hidden" aria-label="Login">
-                <User className="size-5" />
-              </Link>
+              <div className="hidden lg:flex items-center gap-2">
+                <Link href="/login" className="btn-outline">
+                  Sign in
+                </Link>
+                <Link href="/signup" className="btn-primary">
+                  Sign up
+                </Link>
+              </div>
+              <div className="lg:hidden">
+                <Link href="/login" className="btn-ghost size-9" aria-label="Login">
+                  <User className="size-5" />
+                </Link>
+              </div>
             </>
           )}
         </div>
@@ -125,10 +135,10 @@ export function Header({ user }: { user: SessionUser | null }) {
 
       {open && (
         <div className="pointer-events-auto fixed inset-0 z-[60] bg-black/40 lg:hidden" onClick={() => setOpen(false)}>
-          <aside className="absolute left-0 top-0 h-full w-72 bg-secondary p-5 shadow-header" onClick={(e) => e.stopPropagation()}>
+          <aside className="absolute left-0 top-0 h-full w-[min(18rem,88vw)] bg-secondary p-5 shadow-header overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between mb-6">
               <Logo />
-              <button className="btn-ghost" onClick={() => setOpen(false)} aria-label="Close">
+              <button className="btn-ghost size-9" onClick={() => setOpen(false)} aria-label="Close">
                 <X className="size-5" />
               </button>
             </div>
@@ -136,12 +146,28 @@ export function Header({ user }: { user: SessionUser | null }) {
               <input className="field rounded-full" placeholder="search" value={q} onChange={(e) => setQ(e.target.value)} />
             </form>
             <nav className="flex flex-col gap-1 text-sm">
-              {[...nav, { href: "/blogs", label: "Blogs" }, { href: "/digital-products", label: "Digital Products" }].map((item) => (
-                <Link key={item.href} href={item.href} className="rounded-lg px-3 py-2 hover:bg-muted" onClick={() => setOpen(false)}>
+              {[...nav, ...extra].map((item) => (
+                <Link key={item.href} href={item.href} className="rounded-lg px-3 py-2.5 hover:bg-muted" onClick={() => setOpen(false)}>
                   {item.label}
                 </Link>
               ))}
             </nav>
+            <div className="mt-6 flex flex-col gap-2">
+              {user ? (
+                <Link href="/dashboard" className="btn-primary w-full" onClick={() => setOpen(false)}>
+                  My learning
+                </Link>
+              ) : (
+                <>
+                  <Link href="/login" className="btn-outline w-full" onClick={() => setOpen(false)}>
+                    Sign in
+                  </Link>
+                  <Link href="/signup" className="btn-primary w-full" onClick={() => setOpen(false)}>
+                    Sign up
+                  </Link>
+                </>
+              )}
+            </div>
           </aside>
         </div>
       )}

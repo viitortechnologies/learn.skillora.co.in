@@ -17,10 +17,10 @@ export function BrowseCards() {
           <Link
             key={href}
             href={href}
-            className="flex flex-col items-center justify-center gap-3 rounded-2xl border bg-secondary p-6 hover:shadow-header transition-shadow"
+            className="flex flex-col items-center justify-center gap-2 sm:gap-3 rounded-2xl border bg-secondary p-4 sm:p-6 hover:shadow-header transition-shadow min-w-0 text-center"
           >
-            <Icon className="text-primary size-8" />
-            <span className="font-medium text-sm md:text-base">{label}</span>
+            <Icon className="text-primary size-6 sm:size-8 shrink-0" />
+            <span className="font-medium text-xs sm:text-sm md:text-base leading-tight">{label}</span>
           </Link>
         ))}
       </div>

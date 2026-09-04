@@ -5,7 +5,7 @@ import { getSession } from "@/lib/auth";
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const user = await getSession();
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col overflow-x-hidden">
       <Header user={user} />
       <main className="flex-1">{children}</main>
       <Footer />
