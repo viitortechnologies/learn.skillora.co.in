@@ -2,7 +2,7 @@ import "server-only";
 import fs from "fs";
 import path from "path";
 import { createSeedDatabase } from "./seed";
-import type { Course, Database, Lesson } from "./types";
+import type { Course, Database, Ebook, Lesson } from "./types";
 
 const isServerless = process.env.VERCEL === "1";
 const DATA_DIR = isServerless ? path.join("/tmp", "skillora-data") : path.join(process.cwd(), "data");
@@ -26,12 +26,23 @@ export function getUploadDir() {
   return UPLOAD_DIR;
 }
 
+function withFreshCatalog(db: Database): Database {
+  const seed = createSeedDatabase();
+  return {
+    ...db,
+    courses: seed.courses,
+    ebooks: seed.ebooks,
+    blogs: seed.blogs,
+    testimonials: seed.testimonials,
+  };
+}
+
 export async function readDb(): Promise<Database> {
   if (memoryDb) return memoryDb;
 
   try {
     if (fs.existsSync(DB_PATH)) {
-      memoryDb = JSON.parse(fs.readFileSync(DB_PATH, "utf8")) as Database;
+      memoryDb = withFreshCatalog(JSON.parse(fs.readFileSync(DB_PATH, "utf8")) as Database);
       return memoryDb;
     }
   } catch {
@@ -71,6 +82,10 @@ export async function updateDb(mutator: (db: Database) => void) {
 
 export function findCourse(db: Database, slugOrId: string) {
   return db.courses.find((c) => c.slug === slugOrId || c.id === slugOrId) ?? null;
+}
+
+export function findEbook(db: Database, slugOrId: string): Ebook | null {
+  return db.ebooks.find((b) => b.slug === slugOrId || b.id === slugOrId) ?? null;
 }
 
 export function findLesson(course: Course, lessonId: string): Lesson | null {

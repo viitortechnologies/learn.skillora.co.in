@@ -48,13 +48,25 @@ export type Course = {
   validUntil: string;
 };
 
+export type EbookAuthor = {
+  name: string;
+  role: string;
+  bio: string;
+};
+
 export type Ebook = {
   id: string;
+  slug: string;
   title: string;
   description: string;
   cover: string;
   price: number;
   originalPrice: number;
+  authors?: string[];
+  publisher?: string;
+  isbn?: string;
+  publishedAt?: string;
+  authorBios?: EbookAuthor[];
 };
 
 export type BlogPost = {

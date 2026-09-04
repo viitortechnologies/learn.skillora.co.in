@@ -388,7 +388,44 @@ export function createSeedDatabase(): Database {
     courses: buildSeedCourses(),
     ebooks: [
       {
+        id: "eb-iot",
+        slug: "internet-of-things-applications",
+        title: "Internet of Things & Its Applications",
+        description:
+          "A practical e-book on the Internet of Things covering smart homes, industry, wearables, connected vehicles, automation and more. Written by Gudimella Sai Ram, Mohammad Gandhi Babu, Dr. P. Vamsheedhar Reddy and Y. Raju. Published by Groovi Techno IT Solution Private Limited.",
+        cover: "/ebooks/iot.jpg",
+        price: 150,
+        originalPrice: 540,
+        authors: ["Gudimella Sai Ram", "Mohammad Gandhi Babu", "Dr. P. Vamsheedhar Reddy", "Y. Raju"],
+        publisher: "Groovi Techno IT Solution Private Limited",
+        isbn: "978-93-6368-015-9",
+        publishedAt: "24 Jun 2026",
+        authorBios: [
+          {
+            name: "Gudimella Sai Ram",
+            role: "Assistant Professor, ECE, Siddhartha Institute of Engineering and Technology (Autonomous), Ibrahimpatnam, Hyderabad",
+            bio: "M.Tech in Digital Electronics and Communication Systems and B.Tech in ECE from JNTU Hyderabad. Currently pursuing Ph.D. at KL University. Over 10 years of teaching experience, 14 research papers, 5 patents, 2 design patents and 2 book publications. Member of IAENG. Research interests include IoT, communication systems, signal processing, image processing, embedded systems and VLSI design.",
+          },
+          {
+            name: "Mohammad Gandhi Babu",
+            role: "Assistant Professor, ECE, AVN Institute of Engineering and Technology (Autonomous), Ibrahimpatnam, Hyderabad",
+            bio: "M.Tech in VLSI & Embedded Systems and B.Tech in ECE from JNTU Hyderabad. Currently pursuing Ph.D. from KL University. More than 10 years of teaching experience, 8 research papers and 1 granted patent. Lifetime member of IETE, ISTE and IAENG. Areas of interest: IoT, VLSI design, communication systems and embedded systems.",
+          },
+          {
+            name: "Dr. P. Vamsheedhar Reddy",
+            role: "Associate Professor, CSE (AI & ML), Keshav Memorial Engineering College, Hyderabad",
+            bio: "Ph.D. in Cloud Computing from VIT University. Over 14 years of teaching experience, 6 SCIE-indexed journal papers, 14 international conference papers and 4 patents. Research interests: fog computing, cloud computing, deep learning, IoT and cybersecurity. Senior Member of IEEE and IAENG.",
+          },
+          {
+            name: "Y. Raju",
+            role: "Assistant Professor, ECE, Sri Indu Institute of Engineering and Technology (Autonomous), Ibrahimpatnam, Hyderabad",
+            bio: "M.Tech in VLSI System Design and B.Tech in ECE from JNTU Hyderabad. 10 years of teaching experience, 10 research papers and 3 patents. Member of IAENG and IRED. Areas of interest: IoT, communication systems, signal processing, embedded systems and VLSI design.",
+          },
+        ],
+      },
+      {
         id: "eb-1",
+        slug: "devops-interview-playbook",
         title: "DevOps Interview Playbook",
         description: "Cloud, CI/CD, Kubernetes and Terraform questions used in Skillora placement drills.",
         cover: "/ebooks/devops.webp",
@@ -397,6 +434,7 @@ export function createSeedDatabase(): Database {
       },
       {
         id: "eb-2",
+        slug: "java-dsa-cheat-sheets",
         title: "Java + DSA Cheat Sheets",
         description: "Patterns, complexity notes and Spring Boot interview maps for full-stack roles.",
         cover: "/ebooks/java.webp",
@@ -405,6 +443,7 @@ export function createSeedDatabase(): Database {
       },
       {
         id: "eb-3",
+        slug: "python-full-stack-handbook",
         title: "Python Full Stack Handbook",
         description: "Django, REST APIs, PostgreSQL and deployment notes from live classroom labs.",
         cover: "/ebooks/python.webp",

@@ -10,24 +10,34 @@ export default async function EbooksPage() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {db.ebooks.map((book) => (
           <article key={book.id} className="card-surface p-5 flex flex-col gap-3">
-            <div className="relative aspect-[3/4] max-h-72 rounded-xl overflow-hidden">
+            <Link href={`/ebooks/${book.slug}`} className="relative aspect-[3/4] max-h-72 rounded-xl overflow-hidden block">
               <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <p className="absolute bottom-3 left-3 right-3 text-white font-semibold text-sm">{book.title}</p>
-            </div>
-            <h2 className="font-semibold">{book.title}</h2>
+            </Link>
+            <Link href={`/ebooks/${book.slug}`}>
+              <h2 className="font-semibold">{book.title}</h2>
+            </Link>
+            {book.authors?.length ? (
+              <p className="text-xs text-muted-foreground">{book.authors.join(" · ")}</p>
+            ) : null}
             <p className="text-sm text-muted-foreground flex-1">{book.description}</p>
             <p className="text-xl font-bold text-primary">{formatInr(book.price)}</p>
             <p className="text-muted-foreground line-through">{formatInr(book.originalPrice)}</p>
             <p className="text-xs text-primary">{discountPercent(book.price, book.originalPrice)}% off</p>
-            <a
-              href={whatsappBuyLink(book.title, book.price)}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-primary w-full text-center"
-            >
-              Buy Now
-            </a>
+            <div className="grid grid-cols-2 gap-2">
+              <Link href={`/ebooks/${book.slug}`} className="btn-outline w-full text-center">
+                View Details
+              </Link>
+              <a
+                href={whatsappBuyLink(book.title, book.price)}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary w-full text-center"
+              >
+                Buy Now
+              </a>
+            </div>
           </article>
         ))}
       </div>

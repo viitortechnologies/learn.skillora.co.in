@@ -11,6 +11,7 @@ for (const course of db.courses || []) {
 }
 
 const ebookCovers = {
+  "eb-iot": "/ebooks/iot.jpg",
   "eb-1": "/ebooks/devops.webp",
   "eb-2": "/ebooks/java.webp",
   "eb-3": "/ebooks/python.webp",
